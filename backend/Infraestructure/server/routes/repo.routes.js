@@ -3,6 +3,6 @@ const repoController = require("../controllers/repo.controller");
 
 const router = Router();
 
-router.get("/getRepo", repoController.getRepo);
+router.get("/commits", repoController.getCommits);
 
 module.exports = router;

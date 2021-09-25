@@ -1,9 +1,9 @@
 const GitHubApiService = require("../../github/GitHubApiService");
 const service = new GitHubApiService();
 
-const getRepo = async (req, res) => {
+const getCommits = async (req, res) => {
   try {
-    const result = await service.getRepository();
+    const result = await service.getCommits();
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
@@ -12,5 +12,5 @@ const getRepo = async (req, res) => {
 };
 
 module.exports = {
-  getRepo,
+  getCommits,
 };

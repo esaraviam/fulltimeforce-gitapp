@@ -27,7 +27,7 @@ class Server {
   }
   routes() {
     this.app.use("/api", mainRoutes);
-    this.app.use("/api/repos", repoRoutes);
+    this.app.use("/api/repo", repoRoutes);
   }
 
   listen() {
