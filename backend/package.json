@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend para app fulltimeforce technical test",
+  "main": "app.js",
+  "author": "Esteban Saravia M (esaraviam)",
+  "license": "MIT",
+  "private": false
+}
