@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node infraestructure/server/app.js",
+    "start": "nodemon infraestructure/server/app.js",
     "test": "jest"
   },
   "dependencies": {
@@ -15,7 +15,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jest": "^27.2.2",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "octokit": "^1.6.1"
   },
   "jest": {
     "testEnvironment": "node",

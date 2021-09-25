@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mainRoutes = require("./routes/main.routes");
+const repoRoutes = require("./routes/repo.routes");
 
 class Server {
   constructor() {
@@ -26,6 +27,7 @@ class Server {
   }
   routes() {
     this.app.use("/api", mainRoutes);
+    this.app.use("/api/repos", repoRoutes);
   }
 
   listen() {
