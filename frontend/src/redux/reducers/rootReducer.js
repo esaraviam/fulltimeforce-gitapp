@@ -1,7 +1,7 @@
 import commitsReducer from "./commits/commits.reducer";
 import { combineReducers } from "redux";
 const rootReducer = () => {
-  combineReducers({
+  return combineReducers({
     // add reducers here
     commits: commitsReducer,
   });
