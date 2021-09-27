@@ -1,7 +1,14 @@
 import React from "react";
+import { formatDistance } from "date-fns";
 
 export const CommitItem = ({ commitData }) => {
   const { commit, author, sha } = commitData;
+
+  const commitDate =
+    formatDistance(new Date(commit.author.date), new Date(), {
+      addSuffix: true,
+    }) || "";
+
   return (
     <div className="pb-1">
       <div className="flex items-center justify-between py-2 hover:bg-green-200 border-l-4 border-green-400 ">
@@ -21,9 +28,7 @@ export const CommitItem = ({ commitData }) => {
             {commit.author.name}
           </div>
         </div>
-        <div className="text-grey text-sm a-400">
-          {commit.comment_count} Comments
-        </div>
+        <div className="text-grey text-sm a-400">{commitDate}</div>
       </div>
     </div>
   );
