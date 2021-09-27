@@ -46,6 +46,7 @@
   "devDependencies": {
     "autoprefixer": "^9",
     "postcss": "^7",
+    "redux-mock-store": "^1.5.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

@@ -8,9 +8,22 @@ export const CommitList = ({ commits }) => {
         <h2 className="font-semibold text-gray-800">Latests Commits</h2>
       </header>
       <div>
-        {commits.map((commit) => (
-          <CommitItem commitData={commit} key={commit.sha} />
-        ))}
+        {commits.length > 0 ? (
+          commits.map((commit) => (
+            <CommitItem
+              data-testid="commit-list"
+              commitData={commit}
+              key={commit.sha}
+            />
+          ))
+        ) : (
+          <p
+            data-testid="no-commits-found"
+            className="text-center text-gray-600"
+          >
+            No commits found
+          </p>
+        )}
       </div>
     </div>
   );
