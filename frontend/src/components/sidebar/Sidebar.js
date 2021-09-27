@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
+import { pageActionsToggleSideBar } from "../../redux/reducers/pageActions/pageActions.thunks";
+import { useSelector, useDispatch } from "react-redux";
+
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const dispatch = useDispatch();
+  const sideBarState = useSelector((state) => state.sidebar);
+
   const location = useLocation();
   const { pathname } = location;
   const page = pathname.split("/")[1];
@@ -14,12 +20,12 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     const clickHandler = ({ target }) => {
       if (!sidebar.current || !trigger.current) return;
       if (
-        !sidebarOpen ||
+        !sideBarState.sidebar ||
         sidebar.current.contains(target) ||
         trigger.current.contains(target)
       )
         return;
-      setSidebarOpen(false);
+      dispatch(pageActionsToggleSideBar);
     };
     document.addEventListener("click", clickHandler);
     return () => document.removeEventListener("click", clickHandler);
@@ -27,8 +33,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
-      if (!sidebarOpen || keyCode !== 27) return;
-      setSidebarOpen(false);
+      if (!sideBarState.sidebar || keyCode !== 27) return;
+      dispatch(pageActionsToggleSideBar);
     };
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
@@ -38,7 +44,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     <div className="lg:w-64">
       <div
         className={`fixed inset-0 bg-gray-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${
-          sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          sideBarState.sidebar ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         aria-hidden="true"
       ></div>
@@ -48,7 +54,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         id="sidebar"
         ref={sidebar}
         className={`absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-gray-800 p-4 transition-transform duration-200 ease-in-out ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-64"
+          sideBarState.sidebar ? "translate-x-0" : "-translate-x-64"
         }`}
       >
         {/* Sidebar header */}
@@ -57,9 +63,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           <button
             ref={trigger}
             className="lg:hidden text-gray-500 hover:text-gray-400"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            onClick={() => dispatch(pageActionsToggleSideBar)}
             aria-controls="sidebar"
-            aria-expanded={sidebarOpen}
+            aria-expanded={sideBarState.sidebar}
           >
             <span className="sr-only">Close sidebar</span>
           </button>

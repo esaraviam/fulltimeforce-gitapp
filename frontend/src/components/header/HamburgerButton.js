@@ -1,14 +1,18 @@
 import React from "react";
+import { pageActionsToggleSideBar } from "../../redux/reducers/pageActions/pageActions.thunks";
+import { useSelector, useDispatch } from "react-redux";
 
-export const HamburgerButton = ({ sidebarOpen, setSidebarOpen }) => {
+export const HamburgerButton = () => {
+  const dispatch = useDispatch();
+  const { sidebar } = useSelector((state) => state.sidebar);
+
   return (
     <button
       className="text-gray-500 hover:text-gray-600 "
       aria-controls="sidebar"
-      aria-expanded={sidebarOpen}
+      aria-expanded={sidebar}
       onClick={() => {
-        console.log(sidebarOpen);
-        setSidebarOpen(!sidebarOpen);
+        dispatch(pageActionsToggleSideBar);
       }}
     >
       <span className="sr-only">Open sidebar</span>
